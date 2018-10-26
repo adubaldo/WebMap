@@ -302,7 +302,7 @@ def index(request, filterservice="", filterportid=""):
 
 
 		r['trhost'] = ''
-		r['trhead'] = '<tr><th>Filename</th><th>Scan Start Time</th><th>Hosts</th><th>&nbsp;</th></tr>'
+		r['trhead'] = '<tr><th>Filename</th><th>Filesize(kB)</th><th>Scan Start Time</th><th>Hosts</th><th>&nbsp;</th></tr>'
 
 		xmlfilescount = 0
 		for i in xmlfiles:
@@ -330,6 +330,7 @@ def index(request, filterservice="", filterportid=""):
 
 			r['trhost'] += '<tr>'+\
 			'	<td style="font-family:monospace">'+html.escape(i)+'</td>'+\
+			'	<td>'+str(round(os.path.getsize('/opt/xml/'+str(i))/1024,1))   +'</td>'+\
 			'	<td>'+html.escape(o['@startstr'])+'</td>'+\
 			'	<td>'+hostnum+'</td>'+\
 			'	<td><a href="'+viewhref+'" class="btn blue right">view</a></td>'+\
