@@ -255,7 +255,7 @@ def index(request, filterservice="", filterportid=""):
 		r['scaninfo'] = '<span class="card-title">Select a Nmap XML file</span><p>Nmap XML files: '+ str(len(xmlfiles)) +'</p>'
 
 		r['trhost'] = ''
-		r['trhead'] = '<tr><th>Filename</th><th>Scan Start Time</th><th>Hosts</th><th>&nbsp;</th></tr>'
+		r['trhead'] = '<tr><th>Filename</th><th>Filesize(kB)</th><th>Scan Start Time</th><th>Hosts</th><th>&nbsp;</th></tr>'
 
 		for i in xmlfiles:
 			oo = xmltodict.parse(open('/opt/xml/'+i, 'r').read())
@@ -277,6 +277,7 @@ def index(request, filterservice="", filterportid=""):
 
 			r['trhost'] += '<tr>'+\
 			'	<td style="font-family:monospace">'+html.escape(i)+'</td>'+\
+			'	<td>'+str(round(os.path.getsize('/opt/xml/'+str(i))/1024,1))   +'</td>'+\
 			'	<td>'+html.escape(o['@startstr'])+'</td>'+\
 			'	<td>'+hostnum+'</td>'+\
 			'	<td><a href="'+viewhref+'" class="btn blue right">view</a></td>'+\
